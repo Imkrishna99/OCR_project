@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const fileUpload = require('multer')({ dest: 'uploads/' });
 const { extractText } = require('./ocr'); // Import OCR function
-const Card = require('./models/Card'); // Import Card model
+const Card = require('./models/card'); // Import Card model
 const dotEnv = require("dotenv").config()
 
 
