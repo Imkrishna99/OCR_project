@@ -4,6 +4,7 @@ const cors = require('cors');
 const fileUpload = require('multer')({ dest: 'uploads/' });
 const { extractText } = require('./ocr'); // Import OCR function
 const Card = require('./models/Card'); // Import Card model
+const dotEnv = require("dotenv").config()
 
 
 const app = express();
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads')); // Serve uploaded files
 
-mongoose.connect("mongodb://localhost:27017/visiting_cards")
+mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
 
@@ -33,5 +34,5 @@ app.get('/cards', async (req, res) => {
     res.status(200).json(cards);
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
